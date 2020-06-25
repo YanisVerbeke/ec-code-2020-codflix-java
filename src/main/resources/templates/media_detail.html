@@ -1,8 +1,37 @@
 #parse("dashboard.html")
 #@mainLayout()
-Medias
 
-<h1>Media Detail</h1>
-<div>$media.getTitle()</div>
+<h1>$media.getTitle()</h1>
+<div>$media.getSummary()</div>
+
+#if($media.getType() == "Serie")
+    <div class="media-list">
+        #foreach($episode in $episodes)
+        <a class="item" href="/episodes/$episode.getId()">
+            <div class="video">
+                <div>
+                    <iframe allowfullscreen="" frameborder="0"
+                            src="$episode.getTrailer_url()" ></iframe>
+                </div>
+            </div>
+            <div class="title">
+                Episode $episode.getEpisode_nb()
+            </div>
+        </a>
+        #end
+    </div>
+#else
+<div>
+    <a class="item" href="/medias/media.getId()">
+        <div class="video">
+            <div>
+                <iframe allowfullscreen="" frameborder="0"
+                        src="$media.getTrailerUrl()" ></iframe>
+            </div>
+        </div>
+    </a>
+</div>
+#end
+
 
 #end

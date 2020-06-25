@@ -60,6 +60,13 @@ CREATE TABLE `media` (
   `trailer_url` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `media`
+--
+INSERT INTO `media` (`genre_id`, `title`, `type`, `status`, `release_date`, `summary`, `trailer_url`) VALUES
+(1, 'The Joy of Painting with Bob Ross', 'Serie' , 'Published', '1983', 'In this half-hour program, artist Bob Ross paints on canvas a beautiful oil painting.', 'https://www.youtube.com/embed/gqdzXNsL_2o'),
+(1, 'The Lord Of The Rings', 'Film', 'Published', '12/10/2001', 'A wedding that went wrong. ', 'https://www.youtube.com/embed/uE-1RPDqJAY');
+
 
 -- --------------------------------------------------------
 
@@ -89,6 +96,29 @@ CREATE TABLE `user` (
   `email` varchar(254) NOT NULL,
   `password` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `episodes`
+--
+
+DROP TABLE IF EXISTS `episodes`;
+CREATE TABLE `episodes` (
+	`id` INT(11) NOT NULL,
+    `episode_nb` INT(11) NOT NULL,
+    `media_id` INT(11) NOT NULL,
+    `trailer_url` VARCHAR(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `episodes`
+--
+INSERT INTO `episodes` (`episode_nb`, `media_id`, `trailer_url`) VALUES
+(1, 1, 'https://www.youtube.com/embed/kJFB6rH3z2A'),
+(2, 1, 'https://www.youtube.com/embed/_MdMhQIOL1Y'),
+(3, 1, 'https://www.youtube.com/embed/QDwd4pMYyuo');
+
 
 --
 -- Indexes for dumped tables
@@ -123,6 +153,13 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `episodes`
+--
+ALTER TABLE `episodes`
+	ADD PRIMARY KEY (`id`),
+    ADD KEY `episode_media_id_fk_media_id` (`media_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -150,6 +187,12 @@ ALTER TABLE `history`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `episodes`
+--
+ALTER TABLE `episodes`
+	MODIFY `id` INT(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
