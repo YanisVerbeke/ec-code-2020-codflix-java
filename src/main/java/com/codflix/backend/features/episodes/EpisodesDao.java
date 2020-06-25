@@ -28,6 +28,26 @@ public class EpisodesDao {
         return episodes;
     }
 
+    public Episode getEpisodeById(int id) {
+        Episode episode = null;
+
+        Connection connection = Database.get().getConnection();
+        try {
+            PreparedStatement st = connection.prepareStatement("SELECT * FROM episodes WHERE id=?");
+
+            st.setInt(1, id);
+
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                episode = mapToEpisode(rs);
+            }
+        } catch (SQLException | ParseException e) {
+            e.printStackTrace();
+        }
+
+        return episode;
+    }
+
     private Episode mapToEpisode(ResultSet rs) throws SQLException, ParseException {
         return new Episode(
                 rs.getInt(1), // id

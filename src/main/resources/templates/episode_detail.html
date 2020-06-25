@@ -1,0 +1,17 @@
+#parse("dashboard.html")
+#@mainLayout()
+
+<h5>Episode $episode.getEpisode_nb()</h5>
+
+<div>
+    <a class="item" href="/medias/media.getId()">
+        <div class="video">
+            <div>
+                <iframe allowfullscreen="" frameborder="0"
+                        src="$episode.getTrailer_url()" ></iframe>
+            </div>
+        </div>
+    </a>
+</div>
+
+#end
